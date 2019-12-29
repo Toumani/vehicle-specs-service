@@ -3,9 +3,8 @@ package com.tripplanner.api.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tripplanner.api.entity.Make;
 import com.tripplanner.api.service.MakeService;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -23,9 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.mockito.BDDMockito.given;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(MakeController.class)
-public class MakeControllerTest {
+class MakeControllerTest {
 
 	@MockBean
 	MakeService makeService;
@@ -36,13 +33,13 @@ public class MakeControllerTest {
 	// This object will be magically initialized by the initFields method below.
 	private JacksonTester<List<Make>> json;
 
-	@Before
-	public void setup() {
+	@BeforeEach
+	void setup() {
 		JacksonTester.initFields(this, new ObjectMapper());
 	}
 
 	@Test
-	public void getAllMakes() throws Exception {
+	void getAllMakes() throws Exception {
 		// given
 		List<Make> makes = new ArrayList<>();
 		makes.add(new Make());

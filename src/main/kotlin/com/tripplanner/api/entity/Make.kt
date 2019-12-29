@@ -18,5 +18,9 @@ class Make() {
 	@Column
 	private var name: String = ""
 
+	constructor(name: String) : this() {
+		this.name = name
+	}
+
 	fun getName(): String = name
 }
