@@ -2,9 +2,11 @@ package com.tripplanner.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tripplanner.api.entity.Make;
-import com.tripplanner.api.service.MakeService;
+import com.tripplanner.api.entity.Model;
+import com.tripplanner.api.service.ModelService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
@@ -18,43 +20,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@WebMvcTest(MakeController.class)
-class MakeControllerTest {
+@WebMvcTest(ModelController.class)
+class ModelControllerTest {
 
 	@MockBean
-	MakeService makeService;
+	private ModelService modelService;
 
 	@Autowired
 	private MockMvc mvc;
 
-	// This object will be magically initialized by the initFields method below.
-	private JacksonTester<List<Make>> json;
+	private JacksonTester<List<Model>> json;
+
+	private List<Model> hyundaiModels;
+
+	private static final String REQUESTED_MAKE_NAME = "Hyundai";
 
 	@BeforeEach
 	void setup() {
 		JacksonTester.initFields(this, new ObjectMapper());
+		Make hyundai = new Make(REQUESTED_MAKE_NAME);
+
+		// given
+		hyundaiModels = new ArrayList<>();
+		hyundaiModels.add(new Model("i10", hyundai));
+		hyundaiModels.add(new Model("i20", hyundai));
+		hyundaiModels.add(new Model("Accent", hyundai));
+		hyundaiModels.add(new Model("i30", hyundai));
+		hyundaiModels.add(new Model("i40", hyundai));
+		hyundaiModels.add(new Model("Creta", hyundai));
+		hyundaiModels.add(new Model("ix35", hyundai));
+		hyundaiModels.add(new Model("Santa Fe", hyundai));
+		hyundaiModels.add(new Model("Sonata", hyundai));
+		Mockito.lenient().when(modelService.getModelsOfMake(REQUESTED_MAKE_NAME)).thenReturn(hyundaiModels);
 	}
 
 	@Test
-	void getAllMakes() throws Exception {
-		// given
-		List<Make> makes = new ArrayList<>();
-		makes.add(new Make());
-		given(makeService.getAllMakes())
-				.willReturn(makes);
-
+	void getModelsOfMake() throws Exception {
 		// when
 		MockHttpServletResponse response = mvc.perform(
-				get("/make/all")
+				get("/model/" + REQUESTED_MAKE_NAME)
 						.accept(MediaType.APPLICATION_JSON))
 				.andReturn().getResponse();
 
 		// then
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.getContentAsString())
-				.isEqualTo(json.write(makes).getJson());
+				.isEqualTo(json.write(hyundaiModels).getJson());
 	}
 }
