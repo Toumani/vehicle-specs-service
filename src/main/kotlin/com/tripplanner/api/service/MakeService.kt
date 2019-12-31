@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service
 @Service
 interface MakeService {
 
+    fun populate()
+
     fun getAllMakes(): List<Make>
 
 }

@@ -15,6 +15,11 @@ class MakeController (
 		private val makeService: MakeService
 	) {
 
+	@GetMapping("/populate")
+	fun populate() {
+		makeService.populate()
+	}
+
 	@GetMapping("/all")
 	fun getAllMakes(): ResponseEntity<List<Make>> {
 		return ResponseEntity.ok(makeService.getAllMakes())

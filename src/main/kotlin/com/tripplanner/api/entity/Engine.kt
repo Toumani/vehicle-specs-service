@@ -1,5 +1,6 @@
 package com.tripplanner.api.entity
 
+import com.tripplanner.api.constant.FuelType
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -8,37 +9,29 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.OneToMany
 
-
 @Entity
-class Make() {
+class Engine() {
+
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private var id: Int = 1
+	private var id: Int = 0
 
-	@Column(unique = true)
+	@Column
 	private var name: String = ""
 
+	@Column
+	private var fuelType: FuelType = FuelType.UNKNOWN
+
 	@OneToMany(
-			cascade = [CascadeType.ALL],
+			cascade = [(CascadeType.ALL)],
 			orphanRemoval = true
 	)
-	private var models: List<Model> = ArrayList()
+	private var versions: List<Version> = ArrayList()
 
-	constructor(name: String) : this() {
+	constructor(name: String, fuelType: FuelType) : this() {
 		this.name = name
+		this.fuelType = fuelType
 	}
 
-	constructor(name: String, models: List<Model>) : this() {
-		this.name = name
-
-		for (model in models) {
-			model.setMake(this)
-		}
-		this.models = models
-	}
-
-	fun getName(): String = name
-
-	fun getModels(): List<Model> = models
 }

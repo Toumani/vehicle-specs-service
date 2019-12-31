@@ -16,14 +16,9 @@ class ModelController(
 		val modelService: ModelService
 	) {
 
-
 	@GetMapping("/{makeName}")
 	fun getModelsOfMake(@PathVariable makeName: String): ResponseEntity<List<Model>> {
 		return ResponseEntity.ok(modelService.getModelsOfMake(makeName))
 	}
 
-	@GetMapping("/populate")
-	fun populate() {
-		modelService.populate()
-	}
 }

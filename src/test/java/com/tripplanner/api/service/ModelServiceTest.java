@@ -2,7 +2,6 @@ package com.tripplanner.api.service;
 
 import com.tripplanner.api.entity.Make;
 import com.tripplanner.api.entity.Model;
-import com.tripplanner.api.repository.MakeRepository;
 import com.tripplanner.api.repository.ModelRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +23,8 @@ class ModelServiceTest {
 	private static final String REQUESTED_MAKE_NAME = "Hyundai";
 
 	@BeforeEach
-	void setup(@Mock ModelRepository modelRepository, @Mock MakeRepository makeRepository) {
-		modelService = new ModelServiceImpl(modelRepository, makeRepository);
+	void setup(@Mock ModelRepository modelRepository) {
+		modelService = new ModelServiceImpl(modelRepository);
 		Make hyundai = new Make(REQUESTED_MAKE_NAME);
 		List<Model> hyundaiModels;
 		// given
