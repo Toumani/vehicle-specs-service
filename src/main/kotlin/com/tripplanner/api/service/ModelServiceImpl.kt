@@ -15,6 +15,6 @@ class ModelServiceImpl(
 	}
 
 	override fun getModel(makeName: String, modelName: String): Model {
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+		return this.modelRepository.findModelByName(makeName, modelName)
 	}
 }

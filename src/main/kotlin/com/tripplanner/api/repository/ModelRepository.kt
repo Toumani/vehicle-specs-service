@@ -10,4 +10,7 @@ interface ModelRepository : JpaRepository<Model, Int> {
 	@Query("SELECT m FROM Model m WHERE m.make.name = :makeName")
 	fun findModelsOfMake(@Param("makeName") makeName: String): List<Model>
 
+	@Query("SELECT m FROM Model m WHERE m.make.name = :makeName AND m.name = :modelName")
+	fun findModelByName(@Param("makeName") makeName: String, @Param("modelName") modelName: String): Model
+
 }
