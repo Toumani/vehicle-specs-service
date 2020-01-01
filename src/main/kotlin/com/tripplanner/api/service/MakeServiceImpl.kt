@@ -18,6 +18,6 @@ class MakeServiceImpl(@Autowired val makeRepository : MakeRepository) : MakeServ
 	}
 
 	override fun getMake(makeName: String): Make {
-		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+		return makeRepository.findByName(makeName)
 	}
 }
