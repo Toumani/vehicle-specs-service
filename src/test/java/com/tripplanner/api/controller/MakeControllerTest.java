@@ -85,9 +85,8 @@ class MakeControllerTest {
 				.andReturn().getResponse();
 
 		// then
-		makeJson.write(new MakeDto(hyundai));
-		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		MakeDto actualResponse = makeJson.parse(response.getContentAsString()).getObject();
+		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(actualResponse.getModels().size()).isEqualTo(hyundaiModelNames.length);
 		assertThat(actualResponse.getModels()
 				.stream()

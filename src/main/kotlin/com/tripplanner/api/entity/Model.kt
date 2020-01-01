@@ -58,6 +58,8 @@ class Model() {
 
 	fun getMake(): Make = make
 
+	fun getVersions() = versions
+
 	fun setMake(make: Make) { this.make = make}
 
 	fun setVersions(versions: List<Version>) {

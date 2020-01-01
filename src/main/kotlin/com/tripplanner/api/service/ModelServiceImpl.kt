@@ -13,4 +13,8 @@ class ModelServiceImpl(
 	override fun getModelsOfMake(makeName: String): List<Model> {
 		return this.modelRepository.findModelsOfMake(makeName)
 	}
+
+	override fun getModel(makeName: String, modelName: String): Model {
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
 }
