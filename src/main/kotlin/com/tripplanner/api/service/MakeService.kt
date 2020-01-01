@@ -10,4 +10,6 @@ interface MakeService {
 
     fun getAllMakes(): List<Make>
 
+    fun getMake(makeName: String): Make
+
 }

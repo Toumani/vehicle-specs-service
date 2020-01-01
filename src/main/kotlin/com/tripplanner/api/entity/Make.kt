@@ -1,5 +1,6 @@
 package com.tripplanner.api.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -19,6 +20,7 @@ class Make() {
 	@Column(unique = true)
 	private var name: String = ""
 
+	@JsonIgnore
 	@OneToMany(
 			cascade = [CascadeType.ALL],
 			orphanRemoval = true

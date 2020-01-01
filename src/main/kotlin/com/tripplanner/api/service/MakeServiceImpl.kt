@@ -16,4 +16,8 @@ class MakeServiceImpl(@Autowired val makeRepository : MakeRepository) : MakeServ
 	override fun getAllMakes(): List<Make> {
 		return this.makeRepository.findAll()
 	}
+
+	override fun getMake(makeName: String): Make {
+		TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+	}
 }
